@@ -5,23 +5,43 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  background-color: teal;
 }
 
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 97%;
+  padding: 6px;
 }
 
 .board-lists {
   display: grid;
-  grid-auto-columns: 272px;
+  grid-auto-columns: 100%;
   grid-auto-flow: column;
   grid-gap: 8px;
-  border-style: solid;
+}
+
+.board-list {
+  background-color: gainsboro;
+  border-radius: 3px;
+  padding: 10px;
   height: 100%;
+  text-align: center;
+}
+
+.new-card-button {
+  position: absolute;
+  bottom: 0;
+  cursor: pointer;
+}
+
+.card-container {
+  width: 200px;
+  height: 20px;
+  text-align: center;
+  background: white;
 }

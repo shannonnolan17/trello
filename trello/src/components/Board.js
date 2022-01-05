@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import Column from './Column';
 
 const Board = () => {
-  const [columns, setColumns] = useState([]);
-
-  useEffect(() => {
-    setColumns(['To Do', 'In Progress', 'QA', 'Done'])
-  })
-
+  const [columns, setColumns] = useState(['To Do', 'In Progress', 'QA', 'Done']);
+  
   return (
     <div className='container'>
-      {columns.map((col) => {
-        return (
-          <div className='board-lists'>
-            {col}
-          </div>
-        )
-      })}
+      <div className='board-lists'>
+        {columns.map((col) => {
+          return <Column key={col} column={col} />
+        })}
+      </div>
     </div>
   );
 };
