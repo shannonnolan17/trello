@@ -59,6 +59,7 @@ body {
 
 .toggle {
   margin: 8px;
+  cursor: pointer;
 }
 
 .textarea {

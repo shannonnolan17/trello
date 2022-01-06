@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types, react/require-default-props */
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const Board = () => {
   const [columns] = useState(['To Do', 'In Progress', 'QA', 'Done']);
@@ -8,18 +8,15 @@ const Board = () => {
   const [tasks, setTasks] = useState([]);
   const [newTask, setCreateTask] = useState('');
 
-  const handleSubmit = (event, col) => {
-    if (event.target.value === '') {
+  const handleSubmit = (col) => {
+    if (newTask === '') {
       return alert('Please enter a title for this card')
     }
-    console.log(tasks, '8')
-    console.log(newTask, 'newTask')
-    console.log(col, 'col')
 
     setNewCard(false);
     setTasks([...tasks, { name: newTask, column: col }]);
     setCreateTask('');
-    console.log(tasks, 'lakdjfa')
+
     return tasks;
   };
 
@@ -40,19 +37,10 @@ const Board = () => {
   const onDrop = (event, col) => {
     const id = JSON.parse(event.dataTransfer.getData("id"));
     const oldTask = tasks.find(element => element.name === id.name)
-
-    if (id.column === col) {
-      const oldTaskIndex = tasks.indexOf(oldTask);
-      // console.log(oldTaskIndex, 'oldTaskIndex')
-      const newTaskIndex = tasks.indexOf(id);
-      // console.log(newTaskIndex, 'newTaskIndex')
-      tasks.splice(oldTaskIndex, 0, newTaskIndex);
-    }
     const newTask = oldTask.column = col
-  
+
     setTasks([...tasks, newTask]);
   };
-  console.log(tasks.length > 0 , 'tasks.length > 0 ')
 
   return (
     <div className='container'>
@@ -62,8 +50,8 @@ const Board = () => {
             <div
               key={col}
               className='board-list'
-              onDragOver={e => { onDragOver(e) }}
-              onDrop={e => { onDrop(e, col) }}>
+              onDragOver={(e) => {onDragOver(e)}}
+              onDrop={(e) => {onDrop(e, col)}}>
               <div className='title'>
                 {col}
               </div>
@@ -102,14 +90,13 @@ const Board = () => {
 };
 
 const Task = ({task, dragStartHandler, col, onDrop}) => {
-  console.log(task.column, 'col')
-  console.log(col, 'cjdjdol')
   if (task.column === col) {
     return(
       <div 
         draggable
         onDragStart={(e) => { dragStartHandler(e, task) }}
         onDrop={(e) => { onDrop(e, col) }}
+        id={task}
         className='card-container'> 
         {task.name} 
       </div> 
@@ -118,7 +105,14 @@ const Task = ({task, dragStartHandler, col, onDrop}) => {
   return null;
 };
 
-const NewTask = ({toggleCard, handleSubmit, col, columns, setCreateTask}) => {
+Task.propTypes = {
+  task: PropTypes.object,
+  dragStartHandler: PropTypes.func,
+  onDrop: PropTypes.func,
+  col: PropTypes.string,
+};
+
+const NewTask = ({toggleCard, handleSubmit, col, setCreateTask}) => {
   const handleChange = (event) => {
     setCreateTask(event.target.value);
   };
@@ -130,17 +124,25 @@ const NewTask = ({toggleCard, handleSubmit, col, columns, setCreateTask}) => {
         name="textValue"
         rows="3"
         placeholder="Enter a title for this card..."
-        onChange={e => handleChange(e)} />
+        onChange={(e) => handleChange(e)} />
       <div className='button-container'>
         <div 
           className='button'
-          onClick={(e) => handleSubmit(e, col, columns.indexOf(col))}>
+          onClick={() => handleSubmit(col)}>
           Add Card
         </div>
         <div className='toggle' onClick={() => toggleCard(false, col)}>X</div>
       </div>
     </div>
   )
+};
+
+NewTask.propTypes = {
+  toggleCard: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  setCreateTask: PropTypes.func,
+  col: PropTypes.string,
+  columns: PropTypes.array,
 };
 
 export default Board;
