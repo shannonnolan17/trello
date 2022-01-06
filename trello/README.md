@@ -8,6 +8,7 @@ This board was built using React and the instructions to run it locally can be f
 
 # TO DOs/ improvements
 Due to the time restrictions there were some things I would normally have loved to added but ran out of time. This includes:
+
     * Tests to test the functionality and the state changes between columns (I ran into some node issues as well)
     * Cleaner CSS files with BEM naming
     * A redux store to better store the state changes across the board which can then hook into the backend for up to date store refreshes
