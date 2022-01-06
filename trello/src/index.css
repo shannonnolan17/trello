@@ -25,23 +25,63 @@ body {
   grid-gap: 8px;
 }
 
+.title {
+  font-weight: 700;
+  text-align: left;
+  font-size: 16px;
+}
+
 .board-list {
   background-color: gainsboro;
   border-radius: 3px;
   padding: 10px;
-  height: 100%;
-  text-align: center;
+  height: 95%;
 }
 
 .new-card-button {
   position: absolute;
-  bottom: 0;
+  bottom: 5%;
   cursor: pointer;
 }
 
 .card-container {
-  width: 200px;
-  height: 20px;
+  margin: 10px;
+  padding: 5px;
   text-align: center;
   background: white;
+  border-radius: 0.2em;
+  box-shadow: 2px 2px 2px gray;
+}
+
+.input-container {
+  padding: 5px;
+}
+
+.toggle {
+  margin: 8px;
+}
+
+.textarea {
+  width: 100%;
+  border-radius: 0.2em;
+  box-shadow: 2px 2px 2px gray;
+  border: none;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.button-container {
+  display: flex;
+}
+
+.button {
+  background-color: #4CAF50;
+  padding: 2px;
+  cursor: pointer;
+  width: 20%;
+  color: white;
+  padding: 5px;
+  border-radius: 0.2em;
+  text-align: center;
+  font-size: 12px;
+  margin-top: 5px;
 }
